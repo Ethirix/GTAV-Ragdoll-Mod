@@ -42,7 +42,7 @@ namespace GTAV_Ragdoll_Mod
                 || Function.Call<bool>(Hash.IS_PED_IN_ANY_VEHICLE, Game.Player.Character, true))
                 && _isSupposedToBeRagdolled)
             {
-                Notification.Show("Caught ragdoll attempt?");
+                ThrowNotification("Caught ragdoll attempt?");
                 _isSupposedToBeRagdolled = false;
             }
         }
@@ -85,13 +85,13 @@ namespace GTAV_Ragdoll_Mod
                 && !Game.Player.Character.IsDead)
             {
                 _runRagdoll = true;
-                Notification.Show("Keybind passed");
+                ThrowNotification("Keybind passed");
             }
             else if (Function.Call<bool>(Hash.IS_CUTSCENE_ACTIVE) 
                      || Function.Call<bool>(Hash.IS_PED_IN_ANY_VEHICLE, Game.Player.Character, true) 
                      || Game.Player.Character.IsDead)
             {
-                Notification.Show("Keybind failed");
+                ThrowNotification("Keybind failed");
             }
         }
 
