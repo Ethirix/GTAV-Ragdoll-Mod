@@ -59,8 +59,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-&lt;"$(SolutionDir)GTA Folder Path.txt" set /p folder=
+    <PostBuildEvent>IF EXIST "$(SolutionDir)GTA Folder Path.txt" (
+&lt;"$(SolutionDir)GTA Folder Path.txt" set /p folder=)
 REM Creates a variable to the path found in the text file.
 IF EXIST "%25folder%25\scripts\" (COPY "$(TargetPath)" "%25folder%25\scripts")
 IF EXIST "%25folder%25\scripts\" (COPY "$(TargetDir)\$(ProjectName).ini" "%25folder%25\scripts")</PostBuildEvent>
