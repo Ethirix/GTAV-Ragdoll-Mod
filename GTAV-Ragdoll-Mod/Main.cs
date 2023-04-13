@@ -1,72 +1,103 @@
 ﻿using System;
 using System.Windows.Forms;
 using GTA;
+using GTA.Native;
 using GTA.UI;
+using GTAV_Ragdoll_Mod.Config;
 
 namespace GTAV_Ragdoll_Mod
 {
     public class Main : Script
     {
-        private bool _ragdollRunning;
         private bool _runRagdoll;
+        private bool _isSupposedToBeRagdolled;
+
+        private readonly RagdollConfig _ragdollConfig;
+        private readonly DebugConfig _debugConfig;
 
         public Main()
         {
+            _ragdollConfig = new RagdollConfig(Settings);
+            _debugConfig = new DebugConfig(Settings);
+
             Tick += OnTick;
             KeyDown += OnKeyDown;
-            KeyUp += OnKeyUp;
         }
 
         private void OnTick(object sender, EventArgs e)
         {
-            if (_runRagdoll)
+            if (_runRagdoll || (_isSupposedToBeRagdolled && !Game.Player.Character.IsRagdoll))
             {
-                _ragdollRunning = true;
                 RunRagdoll();
-                _ragdollRunning = false;
+            }
+
+            if ((_isSupposedToBeRagdolled && _ragdollConfig.CancelSkydive) 
+                || (Game.Player.Character.IsRagdoll && _ragdollConfig.CancelSkydive))
+            {
+                Game.Player.Character.Weapons.Remove(WeaponHash.Parachute);
+            }
+
+            if ((Game.Player.Character.IsDead 
+                || Function.Call<bool>(Hash.IS_CUTSCENE_ACTIVE) 
+                || Function.Call<bool>(Hash.IS_PED_IN_ANY_VEHICLE, Game.Player.Character, true))
+                && _isSupposedToBeRagdolled)
+            {
+                Notification.Show("Caught ragdoll attempt?");
+                _isSupposedToBeRagdolled = false;
             }
         }
 
         private void RunRagdoll()
         {
-            RagdollConfig config = RagdollConfig.GetConfig();
             _runRagdoll = false;
 
-            if (Game.Player.Character.CanRagdoll && !Game.Player.Character.IsRagdoll)
+            if (!Game.Player.Character.IsRagdoll)
             {
-                Wait((int)(config.RagdollStartDelay * 1000));
-                Game.Player.Character.Ragdoll(-1, RagdollType.ScriptControl);
+                ThrowNotification("Ragdolling...");
+                Ragdoll();
             }
-            else if (Game.Player.Character.IsRagdoll)
+            else
             {
-                Wait((int)(config.RagdollEndDelay * 1000));
-                Game.Player.Character.CancelRagdoll();
+                ThrowNotification("Cancelling Ragdoll...");
+                CancelRagdoll();
             }
+        }
 
-            ThrowNotification("Is Ragdoll: " + Game.Player.Character.IsRagdoll);
+        private void Ragdoll()
+        {
+            Wait((int)(_ragdollConfig.RagdollStartDelay * 1000));
+            Game.Player.Character.Ragdoll(-1, RagdollType.ScriptControl);
+            _isSupposedToBeRagdolled = true;
+        }
+
+        private void CancelRagdoll()
+        {
+            _isSupposedToBeRagdolled = false;
+            Wait((int)(_ragdollConfig.RagdollEndDelay * 1000));
+            Game.Player.Character.CancelRagdoll();
         }
 
         private void OnKeyDown(object sender, KeyEventArgs key)
         {
-            RagdollConfig config = RagdollConfig.GetConfig();
-            Enum.TryParse(config.RagdollKeybind, out Keys ragdollKeybind);
-
-            if (key.KeyCode == ragdollKeybind)
+            if (key.KeyCode == _ragdollConfig.RagdollKeybind 
+                && !Function.Call<bool>(Hash.IS_CUTSCENE_ACTIVE) 
+                && !Function.Call<bool>(Hash.IS_PED_IN_ANY_VEHICLE, Game.Player.Character, true)
+                && !Game.Player.Character.IsDead)
             {
-                if (!_ragdollRunning)
-                {
-                    _runRagdoll = true;
-                }
+                _runRagdoll = true;
+                Notification.Show("Keybind passed");
             }
-        }
-
-        private void OnKeyUp(object sender, KeyEventArgs key)
-        {
+            else if (Function.Call<bool>(Hash.IS_CUTSCENE_ACTIVE) 
+                     || Function.Call<bool>(Hash.IS_PED_IN_ANY_VEHICLE, Game.Player.Character, true) 
+                     || Game.Player.Character.IsDead)
+            {
+                Notification.Show("Keybind failed");
+            }
         }
 
         private void ThrowNotification(string message)
         {
-            if (DebugConfig.GetConfig().ShowDebugNotifications)
+            if (_debugConfig.ShowDebugNotifications)
             {
                 Notification.Show(message);
             }
