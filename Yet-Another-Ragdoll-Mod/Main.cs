@@ -26,24 +26,31 @@ namespace Yet_Another_Ragdoll_Mod
 
         private void OnTick(object sender, EventArgs e)
         {
-            if (_runRagdoll || (_isSupposedToBeRagdolled && !Game.Player.Character.IsRagdoll))
-            {
-                RunRagdoll();
-            }
-
-            if ((_isSupposedToBeRagdolled && _ragdollConfig.CancelSkydive) 
-                || (Game.Player.Character.IsRagdoll && _ragdollConfig.CancelSkydive))
+            if ((_isSupposedToBeRagdolled || Game.Player.Character.IsRagdoll) && _ragdollConfig.CancelSkydive)
             {
                 Game.Player.Character.Weapons.Remove(WeaponHash.Parachute);
+                ThrowNotification("Deleted Parachute");
             }
 
             if ((Game.Player.Character.IsDead 
-                || Function.Call<bool>(Hash.IS_CUTSCENE_ACTIVE) 
-                || Function.Call<bool>(Hash.IS_PED_IN_ANY_VEHICLE, Game.Player.Character, true))
+                 || Function.Call<bool>(Hash.IS_CUTSCENE_ACTIVE) 
+                 || Function.Call<bool>(Hash.IS_PED_IN_ANY_VEHICLE, Game.Player.Character, true))
                 && _isSupposedToBeRagdolled)
             {
                 ThrowNotification("Caught ragdoll attempt?");
                 _isSupposedToBeRagdolled = false;
+            }
+
+            if (!_ragdollConfig.CancelSkydive && Game.Player.Character.IsRagdoll && _isSupposedToBeRagdolled)
+            {
+                _isSupposedToBeRagdolled = false;
+                ThrowNotification("Set _isSupposedToBeRagdolled to " + _isSupposedToBeRagdolled + " in NOT CancelSkydive check");
+            }
+
+            if (_runRagdoll || (_isSupposedToBeRagdolled && !Game.Player.Character.IsRagdoll))
+            {
+                ThrowNotification("RunRagdoll in Tick Loop hit.");
+                RunRagdoll();
             }
         }
 

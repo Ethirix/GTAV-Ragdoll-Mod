@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Yet_Another_Ragdoll_Mod</RootNamespace>
-    <AssemblyName>Yet_Another_Ragdoll_Mod</AssemblyName>
+    <AssemblyName>Yet-Another-Ragdoll-Mod</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
