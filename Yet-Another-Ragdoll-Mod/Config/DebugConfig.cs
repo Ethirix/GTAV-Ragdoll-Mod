@@ -1,6 +1,6 @@
 ﻿using GTA;
 
-namespace GTAV_Ragdoll_Mod.Config
+namespace Yet_Another_Ragdoll_Mod.Config
 {
     public class DebugConfig
     {
