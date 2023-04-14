@@ -27,4 +27,4 @@ Example: `C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V`
 
 ## Tasks
 - [x] Rename the Project and related files to Yet Another Ragdoll Mod https://github.com/Ethirix/Yet-Another-Ragdoll-Mod/issues/3
-- [ ] Upload to [gta5-mods.com](https://gta5-mods.com)
+- [x] Uploaded to [gta5-mods.com](https://www.gta5-mods.com/scripts/yet-another-ragdoll-mod-yarm)
