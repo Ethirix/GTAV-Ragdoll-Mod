@@ -1,6 +1,6 @@
 # Yet Another Ragdoll Mod (YARM)
 
-Yet another Ragdoll Mod for GTA V that I created because the other Ragdoll mods didn't have the options I wanted or... none at all.
+Yet Another Ragdoll Mod is a GTA V mod that I created because the other Ragdoll mods didn't have the options I wanted or... none at all.
 So here is my take on a the good ol' ragdoll mod.
 
 ## Requirements
@@ -15,14 +15,14 @@ So here is my take on a the good ol' ragdoll mod.
 ## Usage
 Once pulled from Github, ensure that `Script Hook V .NET 3` is installed - if so, compiling should just work.
 
-If you wish to have the .dll and .ini files to be automatically moved to the SHVDN scripts folder, please create a file called `GTA Folder Path.txt` in the `GTAV-Ragdoll-Mod` folder.
+If you wish to have the .dll and .ini files to be automatically moved to the SHVDN scripts folder, please create a file called `GTA Folder Path.txt` in the `Yet-Another-Ragdoll-Mod` folder.
 
-Such as: `..\GTAV-Ragdoll-Mod\GTAV-Ragdoll-Mod\GTA Folder Path.txt`
+Such as: `..\Yet-Another-Ragdoll-Mod\Yet-Another-Ragdoll-Mod\GTA Folder Path.txt`
 
 Then provide the file with your path to your GTA V install and do not give the path a trailing backslash on the path.
 
 Example: `C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V`
 
 ## Tasks
-- [ ] Rename the Project and related files to Yet Another Ragdoll Mod
+- [x] Rename the Project and related files to Yet Another Ragdoll Mod https://github.com/Ethirix/Yet-Another-Ragdoll-Mod/issues/3
 - [ ] Upload to [gta5-mods.com](https://gta5-mods.com)
