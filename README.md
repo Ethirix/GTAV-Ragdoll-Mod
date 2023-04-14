@@ -3,6 +3,8 @@
 Yet Another Ragdoll Mod is a GTA V mod that I created because the other Ragdoll mods didn't have the options I wanted or... none at all.
 So here is my take on a the good ol' ragdoll mod.
 
+![Initial_YARM_Splash](https://user-images.githubusercontent.com/68773585/231936515-8821ae29-5c64-45a1-935e-fd3065d224e5.jpg)
+
 ## Requirements
 - GTA V
   - [C++ Script Hook V](http://www.dev-c.com/gtav/scripthookv/)
