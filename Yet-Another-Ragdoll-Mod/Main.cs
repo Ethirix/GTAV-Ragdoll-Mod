@@ -3,9 +3,9 @@ using System.Windows.Forms;
 using GTA;
 using GTA.Native;
 using GTA.UI;
-using GTAV_Ragdoll_Mod.Config;
+using Yet_Another_Ragdoll_Mod.Config;
 
-namespace GTAV_Ragdoll_Mod
+namespace Yet_Another_Ragdoll_Mod
 {
     public class Main : Script
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{7E8A4587-3FC2-4924-9438-EF5E55AFE6CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GTAV_Ragdoll_Mod</RootNamespace>
-    <AssemblyName>GTAV-Ragdoll-Mod</AssemblyName>
+    <RootNamespace>Yet_Another_Ragdoll_Mod</RootNamespace>
+    <AssemblyName>Yet_Another_Ragdoll_Mod</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -51,7 +51,7 @@
     <Compile Include="Config\RagdollConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GTAV-Ragdoll-Mod.ini">
+    <None Include="Yet-Another-Ragdoll-Mod.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
